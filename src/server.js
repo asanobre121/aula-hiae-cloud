@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 })
 app.get("/healthCheck", (req, res) => {
     console.log("chegou aqui")
-    res.status(200).json( { status: "Server Online", version: version, bgcolor: env == "Production" ? "#87CEEB	" : "#F08080", env: env })
+    res.status(200).json({ status: "Server Online", version: version, bgcolor: env == "Production" ? "#87CEEB	" : "#F08080", env: env })
 })
 // //Exercicio 1
 app.get("/exercicio1", (req, res) => {
@@ -181,84 +181,91 @@ app.get("/exercicio4", (req, res) => {
             dividas: 30000
         }
     ]
-    
+
     return res.status(200).send(listaClientes)
 })
 //Exercicio 5
 app.post("/exercicio5", (req, res) => {
     var compra = req.body
-    fs.readFile("listaCompras.json", function(err, data) {
-      
+    fs.readFile("listaCompras.json", function (err, data) {
+
         // Check for errors
         if (err) throw err;
-       
+
         // Converting to JSON
         const compras = JSON.parse(data);
         compras.push(compra)
         console.log(compras)
-        
+
         fs.writeFile("./listaCompras.json", JSON.stringify(compras), err => {
-     
+
             // Checking for errors
-            if (err) throw err; 
-           
+            if (err) throw err;
+
             console.log("Done writing"); // Success
         });
     });
-    
+
     // return res.status(200).send("Server Online")
 })
-//Exercicio 6
-app.get("/desafio", (req, res) => {
-    fs.readFile("listaCompras.json", function(err, data) {
-      
+//Desafio 1
+app.get("/desafio1", (req, res) => {
+    const paciente = { nome: "Roberto" }
+    return res.status(200).json(paciente)
+})
+//Desafio 2
+app.get("/desafio2", (req, res) => {
+    const paciente = {
+        nome: "Roberto",
+        idade: 23,
+        genero: "Masculino",
+        altura: "1.80",
+    }
+    return res.status(200).json(paciente)
+})
+//Desafio 4
+app.get("/desafio3", (req, res) => {
+    const consultas = [{
+        nome: "Roberto",
+        idade: 23,
+        genero: "Masculino",
+        altura: "1.80",
+        medico: "Khalil",
+        dataConsulta: "01/03/2021"
+    },
+    {
+        nome: "Roberto",
+        idade: 23,
+        genero: "Masculino",
+        altura: "1.80",
+        medico: "Sandro",
+        dataConsulta: "25/07/2022"
+    },
+    {
+        nome: "Roberto",
+        idade: 24,
+        genero: "Masculino",
+        altura: "1.80",
+        medico: "Khalil",
+        dataConsulta: "29/08/2022"
+    }
+    ]
+    return res.status(200).json(consultas)
+})
+//Desafio 5
+app.get("/desafio4", (req, res) => {
+    fs.readFile("listaCompras.json", function (err, data) {
+
         // Check for errors
         if (err) throw err;
-       
+
         // Converting to JSON
         const compras = JSON.parse(data);
         return res.status(200).json(compras)
     });
-    
 })
-// //Exercicio 7
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 8
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 9
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 10
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 11
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 12
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 13
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 14
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
-// //Exercicio 15
-// app.get("/", (req, res) => {
-//     return res.status(200).send("Server Online")
-// })
 
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`App listening on port ${port}`)
 })
