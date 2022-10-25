@@ -14,7 +14,7 @@ app.use(express.urlencoded({ limit: '200mb', extended: true }))
 app.use(express.json({ limit: '200mb' }))
 // Routes
 app.get("/", (req, res) => {
-    res.status(200).send("Server Online")
+    res.status(200).send("Server Online!")
 })
 app.get("/healthCheck", (req, res) => {
     console.log("chegou aqui")
